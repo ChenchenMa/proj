@@ -7,7 +7,7 @@ public class ArrayDeque <Item> {
     private int size;
     private int nextLast;
     private int nextFirst;
-    public int length;
+    private int length;
 
     public ArrayDeque(){
         items = (Item[]) new Object[8];
@@ -28,7 +28,7 @@ public class ArrayDeque <Item> {
         if(size == items.length){
             resize (size*3, size);
             nextFirst = size-1;
-            nextLast = size*2;
+            nextLast = size*2+1;
         }
         items[nextFirst] = item;
         if(nextFirst!=0){nextFirst-=1;}
@@ -40,7 +40,7 @@ public class ArrayDeque <Item> {
         if(size == items.length){
             resize (size*3, size);
             nextFirst = size-1;
-            nextLast = size*2;
+            nextLast = size*2+1;
         }
         items[nextLast]=item;
         if(nextLast!=length-1){nextLast+=1;}
@@ -77,7 +77,7 @@ public class ArrayDeque <Item> {
         if(size*4<length){
             resize(size*3, size);
             nextFirst = size-1;
-            nextLast = size*2;
+            nextLast = size*2+1;
         }
        Item first = (Item) new Object();
         if(nextFirst!=length-1){
@@ -96,7 +96,7 @@ public class ArrayDeque <Item> {
         if(size*4<length){
             resize(size*3, size);
             nextFirst = size-1;
-            nextLast = size*2;
+            nextLast = size*2+1;
         }
         Item last = (Item) new Object();
         if(nextLast != 0){
