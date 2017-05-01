@@ -105,7 +105,7 @@ public class ArrayDeque<Item> {
             last = items[nextLast];
             items[nextLast] = null;
             size -= 1;
-            if (size * 4 < items.length && items.length < 16) {
+            if (size * 4 < items.length && items.length > 16) {
                 resize(size * 2);
             }
             return last;
