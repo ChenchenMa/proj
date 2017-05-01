@@ -82,25 +82,24 @@ public class ArrayDeque<Item> {
     }
 
     public Item removeFirst() {
-        if (size * 4 < items.length) {
-            resize(size * 3, size);
-        }
-        Item first = (Item) new Object();
         if (size >= 1) {
+            Item first = (Item) new Object();
             if (nextFirst != items.length - 1) {
-                first = items[nextFirst + 1];
                 nextFirst += 1;
             } else if (nextFirst == items.length - 1) {
-                first = items[0];
                 nextFirst = 0;
             }
+            first = items[nextFirst];
+            items[nextFirst] = null;
             size -= 1;
+            if (size * 4 < items.length && items.length > 16) {
+                resize(size * 3, size);
+            }
             return first;
         }
         else {
             return null;
         }
-
     }
 
     public Item removeLast() {
