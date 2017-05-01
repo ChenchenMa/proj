@@ -55,7 +55,7 @@ public class ArrayDeque<Item> {
     }
 
     public boolean isEmpty() {
-        return (size == 0)
+        return (size == 0);
     }
 
     public int size() {
@@ -90,7 +90,7 @@ public class ArrayDeque<Item> {
             if (nextFirst != items.length - 1) {
                 first = items[nextFirst + 1];
                 nextFirst += 1;
-            } else (nextFirst == items.length - 1) {
+            } else if (nextFirst == items.length - 1) {
                 first = items[0];
                 nextFirst = 0;
             }
@@ -112,7 +112,7 @@ public class ArrayDeque<Item> {
             if (nextLast != 0) {
                 last = items[nextLast - 1];
                 nextLast = nextLast - 1;
-            } else (nextLast == 0) {
+            } else if (nextLast == 0) {
                 last = items[items.length - 1];
                 nextLast = items.length - 1;
             }
