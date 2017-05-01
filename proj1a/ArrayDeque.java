@@ -15,22 +15,24 @@ public class ArrayDeque<Item> {
         nextLast = 1;
     }
 
-    private void resize(int capacity, int start) {
+    private void resize(int capacity) {
         Item[] a = (Item[]) new Object[capacity];
-        if (nextLast < nextFirst) {
-            System.arraycopy(items, 0, a, start, size);
+        if(nextFirst < nextLast -1){
+            System.arraycopy(items,nextFirst+1, a, 0, size);
+        } else if (nextFirst == items.length - 1) {
+            System.arraycopy(items, 0, a, 0, size);
         } else {
-            System.arraycopy(items, nextLast, a, start, size - nextLast);
-            System.arraycopy(items, 0, a, start + size - nextLast, nextFirst + 1);
+            System.arraycopy(items, nextFirst+1, a, 0, items.length - nextFirst - 1);
+            System.arraycopy(items, 0, a, items.length - nextFirst - 1, nextLast );
         }
         items = a;
-        nextLast = start + size;
-        nextFirst = start - 1;
+        nextLast = size;
+        nextFirst = capacity - 1;
     }
 
     public void addFirst(Item item) {
         if (size == items.length) {
-            resize(size * 3, size);
+            resize(size * 3);
         }
         items[nextFirst] = item;
         if (nextFirst != 0) {
@@ -43,7 +45,7 @@ public class ArrayDeque<Item> {
 
     public void addLast(Item item) {
         if (size == items.length) {
-            resize(size * 3, size);
+            resize(size * 3);
         }
         items[nextLast] = item;
         if (nextLast != items.length - 1) {
@@ -63,21 +65,11 @@ public class ArrayDeque<Item> {
     }
 
     public void printDeque() {
-        if (nextLast - nextFirst + 1 == size) {
-            for (int i = 0; i < size; i++) {
-                System.out.print(items[nextFirst + i + 1] + " ");
-            }
-        } else if (nextFirst < nextLast) {
-            for (int i = nextFirst + 1; i < items.length; i++) {
-                System.out.print(items[i] + " ");
-            }
-            for (int i = 0; i < nextLast; i++) {
-                System.out.print(items[i] + " ");
-            }
-        } else {
-            for (int i = 0; i < size; i++) {
-                System.out.print(items[i] + "");
-            }
+        if (isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < size; i = i + 1) {
+            System.out.print(get(i) + " ");
         }
     }
 
@@ -93,7 +85,7 @@ public class ArrayDeque<Item> {
             items[nextFirst] = null;
             size -= 1;
             if (size * 4 < items.length && items.length > 16) {
-                resize(size * 3, size);
+                resize(size * 3);
             }
             return first;
         }
@@ -114,7 +106,7 @@ public class ArrayDeque<Item> {
             items[nextLast] = null;
             size -= 1;
             if (size * 4 < items.length && items.length < 16) {
-                resize(size * 3, size);
+                resize(size * 3);
             }
             return last;
         }
@@ -124,7 +116,7 @@ public class ArrayDeque<Item> {
     }
 
     public Item get(int index) {
-        if (index > size) {
+        if (index > size - 1) {
             return null;
         } else if (nextFirst + 1 + index < items.length) {
             return items[nextFirst + 1 + index];
