@@ -55,11 +55,7 @@ public class ArrayDeque<Item> {
     }
 
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return (size == 0)
     }
 
     public int size() {
@@ -90,16 +86,21 @@ public class ArrayDeque<Item> {
             resize(size * 3, size);
         }
         Item first = (Item) new Object();
-        if (nextFirst != items.length - 1) {
-            first = items[nextFirst + 1];
-            nextFirst += 1;
+        if (size >= 1) {
+            if (nextFirst != items.length - 1) {
+                first = items[nextFirst + 1];
+                nextFirst += 1;
+            } else (nextFirst == items.length - 1) {
+                first = items[0];
+                nextFirst = 0;
+            }
+            size -= 1;
+            return first;
         }
-        if (nextFirst == items.length - 1) {
-            first = items[0];
-            nextFirst = 0;
+        else {
+            return null;
         }
-        size -= 1;
-        return first;
+
     }
 
     public Item removeLast() {
@@ -107,16 +108,20 @@ public class ArrayDeque<Item> {
             resize(size * 3, size);
         }
         Item last = (Item) new Object();
-        if (nextLast != 0) {
-            last = items[nextLast - 1];
-            nextLast = nextLast - 1;
+        if(size > 0) {
+            if (nextLast != 0) {
+                last = items[nextLast - 1];
+                nextLast = nextLast - 1;
+            } else (nextLast == 0) {
+                last = items[items.length - 1];
+                nextLast = items.length - 1;
+            }
+            size -= 1;
+            return last;
         }
-        if (nextLast == 0) {
-            last = items[items.length - 1];
-            nextLast = items.length - 1;
+        else {
+            return null;
         }
-        size -= 1;
-        return last;
     }
 
     public Item get(int index) {
