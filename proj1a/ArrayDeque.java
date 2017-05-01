@@ -103,19 +103,18 @@ public class ArrayDeque<Item> {
     }
 
     public Item removeLast() {
-        if (size * 4 < items.length) {
-            resize(size * 3, size);
-        }
-        Item last = (Item) new Object();
         if(size > 0) {
+            Item last = (Item) new Object();
             if (nextLast != 0) {
-                last = items[nextLast - 1];
                 nextLast = nextLast - 1;
             } else if (nextLast == 0) {
-                last = items[items.length - 1];
                 nextLast = items.length - 1;
             }
+            last = items[nextLast];
             size -= 1;
+            if (size * 4 < items.length) {
+                resize(size * 3, size);
+            }
             return last;
         }
         else {
