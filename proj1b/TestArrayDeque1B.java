@@ -14,7 +14,7 @@ public class TestArrayDeque1B {
         OperationSequence fs = new OperationSequence();
 
         boolean success = true;
-        for (int i = 0; i < 200 && success; i += 1) {
+        for (int i = 0; i < 500 && success; i += 1) {
             double numberBetweenZeroAndOne = StdRandom.uniform();
             if (numberBetweenZeroAndOne < 0.25) {
                 A.addFirst(i);
