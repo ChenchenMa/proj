@@ -3,16 +3,9 @@
  */
 public class OffByOne implements CharacterComparator {
 
-    int n;
-
-    public OffByOne( int n){
-        this.n = n;
-    }
-
-
     @Override
     public boolean equalChars(char x, char y){
-    return (x-y == n || y-x == n);
+    return (x-y == 1 || y-x == 1);
     }
 
     /*public static void main (String[] args) {
