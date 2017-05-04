@@ -1,7 +1,6 @@
 package synthesizer;
 // TODO: Make sure to make this class a part of the synthesizer package
 // package <package name>;
-import com.sun.xml.internal.ws.api.message.ExceptionHasMessage;
 
 import java.util.Iterator;
 
