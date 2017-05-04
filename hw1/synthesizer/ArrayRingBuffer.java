@@ -84,7 +84,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T>{
 
 
 
-    private class BufferWizard implements Iterator<T> {
+    public class BufferWizard implements Iterator<T> {
         private int notionOfWhereHeIs;
 
         public BufferWizard() {
